@@ -15,6 +15,7 @@ jobs:
         run: echo 'development'
   
   stg:
+    needs: dev
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +23,7 @@ jobs:
         run: echo 'staging'
   
   prd:
+    needs: stg
     runs-on: ubuntu-latest
 
     steps:
