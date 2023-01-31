@@ -2,9 +2,8 @@
 name: Running
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   dev:
@@ -14,7 +13,7 @@ jobs:
       - name: Development
         run: echo 'development'
   
-  stg:
+  stg: # homologação
     needs: dev
     runs-on: ubuntu-latest
 
@@ -22,9 +21,10 @@ jobs:
       - name: Staging
         run: echo 'staging'
   
-  prd:
+  prd: # aprovação
     needs: stg
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       - name: Production
